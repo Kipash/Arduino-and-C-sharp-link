@@ -6,82 +6,27 @@
 
 //References
 
-#include "Button.h"
+#include "OverHead.h"
 #include "Button.h"
 
 //Main loop variables
 
-ButtonClass debugButton;
-
-int timeStamp = 0;
-int loopDelay = 50;
-bool isOverHead = false;
-
-int overheadLedPin = 13;
-int deltaTime = 0;
-
-bool debugEnabled = true;
-bool overhead = false;
+OverheadClass overhead;
 
 void setup()
 {
 	Start();
-
-	debugButton.damper = 500;
-	debugButton.timeStamp = 0;
-
-	pinMode(overheadLedPin, OUTPUT);
-	attachInterrupt(0, OnDebugButoon, RISING);
+	
+	overhead.init();
+	overhead.debugEnabled = true;
+	overhead.loopDelay = 50;
+	overhead.overheadLedPin = 13;
+	overhead.updateCallBack = Update;
 }
 
 void loop()
 {
-	delay(deltaTime);
-
-	timeStamp = millis();
-
-	Update();
-
-	int delta = millis() - timeStamp;
-
-
-	deltaTime = loopDelay - delta;
-	deltaTime = deltaTime < 0 ? 0 : deltaTime;
-
-	Serial.println(deltaTime);
-
-	if (deltaTime == 0)
-	{
-		if (!isOverHead)
-		{
-			isOverHead = true;
-			OnOverhead(true);
-		}
-	}
-	else if (isOverHead)
-	{
-		isOverHead = false;
-		OnOverhead(false);
-	}
-}
-
-void OnDebugButoon()
-{
-	if (debugButton.isValid(millis()))
-	{
-		return;
-	}
-
-	debugButton.timeStamp = millis();
-	debugEnabled = !debugEnabled;
-	OnOverhead(overhead);
-}
-
-void OnOverhead(bool state)
-{
-	overhead = state;
-	state = debugEnabled ? state : false;
-	digitalWrite(overheadLedPin, (state ? HIGH : LOW));
+	overhead.loop();
 }
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -104,7 +49,7 @@ void Start()
 
 void Update()
 {
-
+	Serial.println("Heyoooo");
 }
 
 void SetTestLed(bool state)
