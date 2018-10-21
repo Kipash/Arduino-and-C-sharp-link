@@ -1,0 +1,2 @@
+C:/Dvlp/Prjs/Standalone/Arduino-and-C-sharp-link/Arduino/Arduino/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Dvlp/Prjs/Standalone/Arduino-and-C-sharp-link/Arduino/Arduino/cmake-build-debug/CMakeFiles/rebuild_cache.dir

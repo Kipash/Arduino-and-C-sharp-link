@@ -1,5 +1,5 @@
 /*
- Name:		Sketch1.ino
+ Name:		Arduino.ino
  Created:	20-Oct-18 21:02:14
  Author:	Kip
 */
@@ -11,13 +11,14 @@
 
 //Main loop variables
 
-OverheadClass overhead;
+OverHead overhead;
 
 void setup()
 {
 	Start();
 	
 	overhead.init();
+	
 	overhead.debugEnabled = true;
 	overhead.loopDelay = 50;
 	overhead.overheadLedPin = 13;

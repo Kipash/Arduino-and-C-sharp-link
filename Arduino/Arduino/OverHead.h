@@ -9,27 +9,26 @@
 	#include "WProgram.h"
 #endif
 
-class OverheadClass
+class OverHead
 {
-
 	 protected:
-		int loopTimeStamp;
-		int deltaTime;
+		//int loopTimeStamp;
+		//int deltaTime;
 
 	 public:
-		void (*updateCallBack)();
-		bool isOverHead;
-		int loopDelay;
-		int overheadLedPin;
-		bool debugEnabled;
+		int loopDelay = 50;
+		bool isOverHead = false;
+		int overheadLedPin = 13;
+		bool debugEnabled = true;
+
 		void OnOverhead(bool);
 		void OnDebugButton();
-		
 		void init();
 		void loop();
+		void (*updateCallBack)();
 };
 
-extern OverheadClass OverHead;
+extern OverHead;
 
 #endif
 

@@ -5,43 +5,38 @@
 #include "OverHead.h"
 #include "Button.h"
 
-
-
 ButtonClass debugButton;
 
-int loopTimeStamp = 0;
-int loopDelay = 50;
-bool isOverHead = false;
+int loopTimeStamp;
+int deltaTime;
 
-int overheadLedPin = 13;
-int deltaTime = 0;
+void(*onDebugInterupt)();
 
-bool debugEnabled = true;
+void interruptFunction()
+{
+	onDebugInterupt();
+}
 
-void OverheadClass::init()
+void OverHead::init()
 {
 	debugButton.damper = 500;
 	debugButton.timeStamp = 0;
 
 	pinMode(overheadLedPin, OUTPUT);
 	
-	
-	attachInterrupt(0, callBack, RISING);
+	onDebugInterupt = OnDebugButton;
 
+	//To simplify converting interrupt vector numbers to pin numbers you can call the function digitalPinToInterrupt, passing a pin number. It returns the appropriate interrupt number, or NOT_AN_INTERRUPT (-1).
+	attachInterrupt(digitalPinToInterrupt(2), interruptFunction, RISING);
 }
 
-void callBack()
-{
-	//stuff
-}
-
-void OverheadClass::loop()
+void OverHead::loop()
 {
 	delay(deltaTime);
 
 	loopTimeStamp = millis();
 
-	OverheadClass::updateCallBack();
+	this->updateCallBack();
 
 	int delta = millis() - loopTimeStamp;
 
@@ -67,7 +62,7 @@ void OverheadClass::loop()
 	}
 }
 
-void OverheadClass::OnDebugButton()
+void OverHead::OnDebugButton()
 {
 	if (debugButton.isValid(millis()))
 	{
@@ -78,13 +73,11 @@ void OverheadClass::OnDebugButton()
 	debugEnabled = !debugEnabled;
 	OnOverhead(!isOverHead);
 }
-void OverheadClass::OnOverhead(bool state)
+
+void OverHead::OnOverhead(bool state)
 {
 	isOverHead = state;
 	state = debugEnabled ? state : false;
 	digitalWrite(overheadLedPin, (state ? HIGH : LOW));
 }
-
-
-OverheadClass OverHead;
 

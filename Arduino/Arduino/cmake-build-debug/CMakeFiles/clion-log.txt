@@ -1,0 +1,7 @@
+"C:\Program Files\JetBrains\CLion 2018.2.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\Dvlp\Prjs\Standalone\Arduino-and-C-sharp-link\Arduino\Arduino
+CMake Error at CMakeLists.txt:17 (generate_arduino_firmware):
+  Unknown CMake command "generate_arduino_firmware".
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Dvlp/Prjs/Standalone/Arduino-and-C-sharp-link/Arduino/Arduino/cmake-build-debug/CMakeFiles/CMakeOutput.log".
